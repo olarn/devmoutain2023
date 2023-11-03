@@ -2,7 +2,7 @@ import { Billing } from '../billing';
 import { PlanType } from '../plan/planType';
 import { Transaction } from '../transaction/transaction';
 
-describe('Billing for NightSave plan', () => {
+describe('Billing for Night plan', () => {
   const allDayAndNightTransactions = [
     new Transaction(new Date('2020-01-01 09:00'), new Date('2020-01-01 09:20')),
     new Transaction(new Date('2020-01-01 11:00'), new Date('2020-01-01 11:20')),
@@ -12,15 +12,33 @@ describe('Billing for NightSave plan', () => {
   ];
 
   it('should return 30THB if no transaction', () => {
-    //TODO: Write test case for empty transaction here
+    const billing = new Billing();
+    const transactions: Transaction[] = [];
+    const plan = PlanType.NIGHT_PLAN;
+
+    const actual = billing.calculatesMonthlyFee(transactions, plan);
+
+    expect(actual).toBe(30);
   });
 
   it('should return 30THB if transactions are all night time.', () => {
-    //TODO: Write test case for all night time transactions here
+    const billing = new Billing();
+    const transactions = nightTimeTransactions();
+    const plan = PlanType.NIGHT_PLAN;
+
+    const actual = billing.calculatesMonthlyFee(transactions, plan);
+
+    expect(actual).toBe(30);
   });
 
   it('should return 60THB if transactions are 60 mins daytime and 40 mins nighttime.', () => {
-    //TODO: Write test case for mixed transactions here
+    const billing = new Billing();
+    const transactions = allDayAndNightTransactions;
+    const plan = PlanType.NIGHT_PLAN;
+
+    const actual = billing.calculatesMonthlyFee(transactions, plan);
+
+    expect(actual).toBe(60);
   });
 
   // helper functions ==============================================================

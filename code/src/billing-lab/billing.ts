@@ -1,27 +1,24 @@
 import { Transaction } from './transaction/transaction';
 import { PlanType } from './plan/planType';
+import { BasicPlan } from './plan/basicPlan';
+import { ValuePlan } from './plan/valuePlan';
+import { NightPlan } from './plan/nightPlan';
 
 export class Billing {
   calculatesMonthlyFee(transactions: Transaction[], plan: PlanType): number {
-    let totalMinutes = 0.0;
-    for (const transaction of transactions) {
-      totalMinutes += transaction.totalMinutes();
-    }
-    const minimumToPay = 30;
     let fee = 0.0;
-    if (plan === PlanType.BASIC) {
-      fee = totalMinutes;
-    } else if (plan == PlanType.VALUE) {
-      if (totalMinutes <= 30) {
-        fee = totalMinutes * 0.5;
-      } else {
-        fee = 15 + (totalMinutes - 30);
-      }
-    } else {
-      throw new Error('Unknown plan type');
-    }
-    if (fee < minimumToPay) {
-      return minimumToPay;
+    switch (plan) {
+      case PlanType.BASIC:
+        fee = new BasicPlan().calculateFee(transactions);
+        break;
+      case PlanType.VALUE:
+        fee = new ValuePlan().calculateFee(transactions);
+        break;
+      case PlanType.NIGHT_PLAN:
+        fee = new NightPlan().calculateFee(transactions);
+        break;
+      default:
+        throw new Error('Unknown plan type');
     }
     return fee;
   }

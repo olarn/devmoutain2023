@@ -2,7 +2,7 @@ import { Billing } from '../billing';
 import { PlanType } from '../plan/planType';
 import { Transaction } from '../transaction/transaction';
 
-describe('Billing for NightSave plan', () => {
+describe('Billing for Night plan', () => {
   const allDayAndNightTransactions = [
     new Transaction(new Date('2020-01-01 09:00'), new Date('2020-01-01 09:20')),
     new Transaction(new Date('2020-01-01 11:00'), new Date('2020-01-01 11:20')),
