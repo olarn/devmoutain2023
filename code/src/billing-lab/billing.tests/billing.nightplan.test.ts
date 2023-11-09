@@ -2,11 +2,14 @@ import { Billing } from '../billing';
 import { PlanType } from '../plan/planType';
 import { Transaction } from '../transaction/transaction';
 
-describe('Billing for Night plan', () => {
+describe('Billing for Night plan. Free from 6pm to 6am. 1 THB/min thereafter. Min 30 THB/month.', () => {
   const allDayAndNightTransactions = [
+    // day time 6am - 6pm
     new Transaction(new Date('2020-01-01 09:00'), new Date('2020-01-01 09:20')),
     new Transaction(new Date('2020-01-01 11:00'), new Date('2020-01-01 11:20')),
     new Transaction(new Date('2020-01-01 14:00'), new Date('2020-01-01 14:20')),
+
+    // night time 6pm - 6am
     new Transaction(new Date('2020-01-01 18:00'), new Date('2020-01-01 18:20')),
     new Transaction(new Date('2020-01-01 22:00'), new Date('2020-01-01 22:20')),
   ];
