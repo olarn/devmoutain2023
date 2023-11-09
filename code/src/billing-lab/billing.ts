@@ -6,20 +6,15 @@ import { NightPlan } from './plan/nightPlan';
 
 export class Billing {
   calculatesMonthlyFee(transactions: Transaction[], plan: PlanType): number {
-    let fee = 0.0;
     switch (plan) {
       case PlanType.BASIC:
-        fee = new BasicPlan().calculateFee(transactions);
-        break;
+        return new BasicPlan().calculateFee(transactions);
       case PlanType.VALUE:
-        fee = new ValuePlan().calculateFee(transactions);
-        break;
+        return new ValuePlan().calculateFee(transactions);
       case PlanType.NIGHT_PLAN:
-        fee = new NightPlan().calculateFee(transactions);
-        break;
+        return new NightPlan().calculateFee(transactions);
       default:
         throw new Error('Unknown plan type');
     }
-    return fee;
   }
 }
