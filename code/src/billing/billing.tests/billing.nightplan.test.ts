@@ -1,5 +1,3 @@
-import { Billing } from '../billing';
-import { PlanType } from '../plan/planType';
 import { Transaction } from '../transaction/transaction';
 
 describe('Billing for Night plan. Free from 6pm to 6am. 1 THB/min thereafter. Min 30 THB/month.', () => {
